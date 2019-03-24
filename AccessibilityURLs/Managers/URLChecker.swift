@@ -16,9 +16,11 @@ struct URLChecker {
         }
     }
     
+    // MARK: - Public API
+    
     func check(urlString: String, atIndex index: Int, completion: @escaping (_ type: URLType, _ time: Double, _ itemIndex: Int) ->()) {
         let correctUrlString = correct(urlString)
-        if let url = URL(string: urlString) {
+        if let url = URL(string: correctUrlString) {
             let request = URLRequest(url: url)
             let session = URLSession.shared
             let startTime = Date()
@@ -44,11 +46,24 @@ struct URLChecker {
         }
     }
     
+    // MARK: - Private API
+    
     private func correct(_ urlString: String) -> String {
-        if urlString.hasPrefix("www") {
-            return urlString
-        } else {
-            return "www." + urlString
+        let lowercasedURL = urlString.lowercased()
+        if !lowercasedURL.starts(with: "http://") && !lowercasedURL.starts(with: "https://") {
+            if !lowercasedURL.starts(with: "www.") {
+                return "https://www.\(lowercasedURL)"
+            }
+                return "https://\(lowercasedURL)"
         }
-    }
+        
+        if !lowercasedURL.contains("://www") {
+            if let range = lowercasedURL.range(of:"://") {
+                return lowercasedURL.replacingCharacters(in:range, with: "://www.")
+            }
+        }
+
+        return lowercasedURL
+            
+        }
 }

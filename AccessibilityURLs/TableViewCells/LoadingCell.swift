@@ -9,16 +9,30 @@
 import UIKit
 
 class LoadingCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - IBOutlets
+    @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView!
+    
+    // MARK: - Properties
+    static let reuseIdentifier = "LoadingCellIdentifier"
+    
+    // MARK: - LifeCycle
+    deinit {
+        stopLoading()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    // MARK: - Public API
+    func configure(_ model: URLModel) {
+        urlLabel.text = model.urlString
+        startLoading()
     }
-
+    
+    // MARK: - Private API
+    private func startLoading() {
+        loadingIndicatorView.startAnimating()
+    }
+    
+    private func stopLoading() {
+        loadingIndicatorView.stopAnimating()
+    }
 }

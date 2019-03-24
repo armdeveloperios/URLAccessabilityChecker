@@ -9,20 +9,23 @@
 import UIKit
 
 class URLTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var URLLabel: UILabel!
+    // MARK: - IBOutlets
+    @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - Properties
+    static let reuseIdentifier = "URLTableViewCellIdentifier"
+    
+    func configure(_ model: URLModel) {
+        urlLabel.text = model.urlString
+        switch model.urlType {
+        case .success:
+            statusImageView.tintColor = .green
+        case .failure:
+            statusImageView.tintColor = .red
+        default:
+            return
+        }
+        statusImageView.image = model.urlType.icon?.withRenderingMode(.alwaysTemplate)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

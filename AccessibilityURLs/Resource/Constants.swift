@@ -11,3 +11,8 @@ import Foundation
 let duringTime = "duringTime"
 let stringURL = "stringURL"
 let urlType = "urlType"
+let edit = "Edit"
+let save = "Save"
+let cancel = "Cancel"
+let add = "Add"
+

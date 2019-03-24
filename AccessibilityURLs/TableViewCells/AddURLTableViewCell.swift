@@ -8,17 +8,36 @@
 
 import UIKit
 
-class AddURLTableViewCell: UITableViewCell {
+protocol AddURLTableViewCellDelegate: class {
+    func addURLTableViewCellDidEndEditing(_ cell: AddURLTableViewCell) -> Bool
+}
 
+class AddURLTableViewCell: UITableViewCell {
+    // MARK: - IBOutlets
+    @IBOutlet weak var urlTextField: UITextField!
+    
+    // MARK: - Properties
+    static let reuseIdentifier = "AddURLIdentifier"
+    weak var delegate: AddURLTableViewCellDelegate?
+    
+    // MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.urlTextField.delegate = self;
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        urlTextField.text = nil
     }
+}
 
+extension AddURLTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let delegate = delegate {
+            return delegate.addURLTableViewCellDidEndEditing(self)
+        }
+        return true
+    }
 }

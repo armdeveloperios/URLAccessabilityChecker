@@ -20,10 +20,13 @@ enum SortType: Int {
 }
 
 class RootViewController: UIViewController {
+
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var rightButtonItem: UIBarButtonItem!
     @IBOutlet weak var leftButtonItem: UIBarButtonItem!
+    @IBOutlet weak var refreshButtonItem: UIBarButtonItem!
+    @IBOutlet weak var sortButtonItem: UIBarButtonItem!
     
     // MARK: - Properties
     var urlChecker = URLChecker()
@@ -35,24 +38,55 @@ class RootViewController: UIViewController {
     var isSelectAdd = false {
         didSet {
             if oldValue {
-                leftButtonItem.title = "Edit"
-                rightButtonItem.title = "Add"
+                leftButtonItem.title = edit
+                rightButtonItem.title = add
             } else {
-                leftButtonItem.title = "Cancel"
-                rightButtonItem.title = "Save"
+                leftButtonItem.title = cancel
+                rightButtonItem.title = save
+            }
+        }
+    }
+    
+    var refreshCount: Int = 0 {
+        didSet {
+            if oldValue == urls.count {
+                sort(by: sortType)
+                refreshCount = 0
             }
         }
     }
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         urls = CoreDataManager.shared.getModels()
         setupSearchController()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Private API
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            print("notification: Keyboard will show")
+            if self.view.frame.origin.y == 0 {
+                self.tableView.contentInset.bottom = keyboardSize.height
+            }
+        }
+        
+    }
+    
+    @objc private func keyboardWillHide(notification: Notification) {
+        self.tableView.contentInset.bottom = 0
+    }
+
     private func setupSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -116,26 +150,43 @@ class RootViewController: UIViewController {
         default:
             return
         }
-        tableView.reloadData()
+        reloadData()
     }
 
-    func searchBarIsEmpty() -> Bool {
+    private func reloadData() {
+        if Thread.current.isMainThread {
+            tableView.reloadData()
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func filterContentForSearchText(_ searchText: String) {
+    private func filterContentForSearchText(_ searchText: String) {
         filteredUrls = urls.filter({( model : URLModel) -> Bool in
             return model.urlString.lowercased().hasPrefix(searchText.lowercased())
         })
         
-        tableView.reloadData()
+        reloadData()
     }
 
-    func isFiltering() -> Bool {
+    private func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
+    private func refreshModel(at index: Int, _ type: URLType, _ time: Double) {
+        urls[index].duringTime = time
+        urls[index].urlType = type
+        CoreDataManager.shared.update(model: urls[index])
+    }
+    
     // MARK: - Actions
+    
     @IBAction func addOrSaveAction(_ sender: UIBarButtonItem) {
         isSelectAdd = !isSelectAdd
         if !isSelectAdd {
@@ -143,7 +194,6 @@ class RootViewController: UIViewController {
                 let textWithoutWhitespace = url.replacingOccurrences(of: " ", with: "")
                 if textWithoutWhitespace.count == 0 {
                     self.showAler(title: "Warning!", message: "Url can not empty.", okAction: nil)
-                    //alert
                 } else {
                     urlChecker.check(urlString: url) { [unowned self] (type, time) in
                         DispatchQueue.global().async {
@@ -152,32 +202,34 @@ class RootViewController: UIViewController {
                                 self.urls[index].urlType = type
                                 self.urls[index].duringTime = time
                                 CoreDataManager.shared.add(model: self.urls[index])
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                }
+                                self.reloadData()
                             }
                         }
                     }
                     let model = URLModel(url, .loading, 0)
                     urls.insert(model, at: 0)
-                    self.tableView.reloadData()
+                    reloadData()
                 }
             }
+            refreshButtonItem.isEnabled = true
+            sortButtonItem.isEnabled = true
+        } else {
+            refreshButtonItem.isEnabled = false
+            sortButtonItem.isEnabled = false
         }
-        tableView.reloadData()
+        reloadData()
     }
     
     @IBAction func refreshAction(_ sender: UIBarButtonItem) {
         for (index, model) in urls.enumerated() {
             model.urlType = .loading
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-            self.urlChecker.check(urlString: model.urlString, atIndex: index) { (type, time, index) in
-                let model = self.urls[index]
-                model.urlType = type
-                model.duringTime = time
-                CoreDataManager.shared.update(model: model)
+            self.urlChecker.check(urlString: model.urlString, atIndex: index) { [weak self] (type, time, index) in
+                
+                self?.refreshModel(at: index, type, time)
                 DispatchQueue.main.async {
-                    self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    self?.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+                    self?.refreshCount += 1
                 }
             }
         }
@@ -185,19 +237,25 @@ class RootViewController: UIViewController {
     
     @IBAction func editOrCancelAction(_ sender: UIBarButtonItem) {
         if isSelectAdd && !isSelectEdit {
-            sender.title = "Edit"
+            sender.title = edit
             self.view.endEditing(true)
+            refreshButtonItem.isEnabled = true
+            sortButtonItem.isEnabled = true
             isSelectAdd = !isSelectAdd
-            tableView.reloadData()
+            reloadData()
         } else if !isSelectAdd && !isSelectEdit {
-            sender.title = "Cancel"
+            sender.title = cancel
             rightButtonItem.isEnabled = false
+            refreshButtonItem.isEnabled = false
+            sortButtonItem.isEnabled = false
             isSelectEdit = !isSelectEdit
             self.tableView.setEditing(true, animated: true)
         } else if isSelectEdit {
-            sender.title = "Edit"
+            sender.title = edit
             isSelectEdit = !isSelectEdit
             rightButtonItem.isEnabled = true
+            refreshButtonItem.isEnabled = true
+            sortButtonItem.isEnabled = true
             self.tableView.setEditing(false, animated: true)
         }
     }
@@ -245,11 +303,20 @@ class RootViewController: UIViewController {
         actionSheet.addAction(declineByResponseTime)
         actionSheet.addAction(cancel)
         
-        self.present(actionSheet, animated: true, completion: nil)
+        
+        if UIDevice.isIphone() {
+            self.present(actionSheet, animated: true, completion: nil)
+        } else {
+            if let currentPopoverpresentioncontroller = actionSheet.popoverPresentationController {
+                currentPopoverpresentioncontroller.barButtonItem = sender
+                self.present(actionSheet, animated: true, completion: nil)
+            }
+        }
     }
 }
 
 extension RootViewController: UITableViewDataSource {
+    // MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return isFiltering() ? filteredUrls.count : isSelectAdd ? 1 : urls.count
     }
@@ -283,6 +350,7 @@ extension RootViewController: UITableViewDataSource {
 }
 
 extension RootViewController: UITableViewDelegate {
+    // MARK: UITableView Delegate
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -295,7 +363,7 @@ extension RootViewController: UITableViewDelegate {
             } else {
                 CoreDataManager.shared.delate(model: model)
                 urls.remove(at: indexPath.row)
-                self.tableView.reloadData()
+                reloadData()
             }
         }
     }
@@ -303,13 +371,14 @@ extension RootViewController: UITableViewDelegate {
 }
 
 extension RootViewController: AddURLTableViewCellDelegate {
+    // MARK: AddURLTableViewCell Delegate
     func addURLTableViewCellDidEndEditing(_ cell: AddURLTableViewCell) -> Bool {
         return cell.urlTextField.resignFirstResponder()
     }
 }
 
 extension RootViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
+    // MARK: UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text {
             filterContentForSearchText(text)

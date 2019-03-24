@@ -8,22 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		EC1137D822440A2800B09D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137D722440A2800B09D50 /* AppDelegate.swift */; };
-		EC1137DA22440A2800B09D50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137D922440A2800B09D50 /* ViewController.swift */; };
+		EC1137DA22440A2800B09D50 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137D922440A2800B09D50 /* RootViewController.swift */; };
 		EC1137DD22440A2800B09D50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1137DB22440A2800B09D50 /* Main.storyboard */; };
 		EC1137E022440A2800B09D50 /* AccessibilityURLs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EC1137DE22440A2800B09D50 /* AccessibilityURLs.xcdatamodeld */; };
 		EC1137E222440A2B00B09D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC1137E122440A2B00B09D50 /* Assets.xcassets */; };
 		EC1137E522440A2B00B09D50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1137E322440A2B00B09D50 /* LaunchScreen.storyboard */; };
+		EC1137ED22442A1C00B09D50 /* URLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137EC22442A1C00B09D50 /* URLTableViewCell.swift */; };
+		EC1137EF22442FB500B09D50 /* URLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137EE22442FB500B09D50 /* URLModel.swift */; };
+		EC1137F22244DC1100B09D50 /* AddURLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137F12244DC1100B09D50 /* AddURLTableViewCell.swift */; };
+		EC1137F72245196A00B09D50 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137F62245196A00B09D50 /* CoreDataManager.swift */; };
+		EC1137F92246217F00B09D50 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137F82246217F00B09D50 /* Constants.swift */; };
+		EC1137FB22463C6A00B09D50 /* URLChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137FA22463C6A00B09D50 /* URLChecker.swift */; };
+		EC1137FD224655B900B09D50 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137FC224655B900B09D50 /* LoadingCell.swift */; };
+		EC1137FF2246886100B09D50 /* UIALerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1137FE2246886100B09D50 /* UIALerts.swift */; };
+		ECB0281822478248000F5F85 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0281722478248000F5F85 /* UIDevice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EC1137D422440A2800B09D50 /* AccessibilityURLs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibilityURLs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1137D722440A2800B09D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC1137D922440A2800B09D50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EC1137D922440A2800B09D50 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		EC1137DC22440A2800B09D50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC1137DF22440A2800B09D50 /* AccessibilityURLs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccessibilityURLs.xcdatamodel; sourceTree = "<group>"; };
 		EC1137E122440A2B00B09D50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC1137E422440A2B00B09D50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1137E622440A2B00B09D50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC1137EC22442A1C00B09D50 /* URLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTableViewCell.swift; sourceTree = "<group>"; };
+		EC1137EE22442FB500B09D50 /* URLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLModel.swift; sourceTree = "<group>"; };
+		EC1137F12244DC1100B09D50 /* AddURLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddURLTableViewCell.swift; sourceTree = "<group>"; };
+		EC1137F62245196A00B09D50 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		EC1137F82246217F00B09D50 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EC1137FA22463C6A00B09D50 /* URLChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLChecker.swift; sourceTree = "<group>"; };
+		EC1137FC224655B900B09D50 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		EC1137FE2246886100B09D50 /* UIALerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIALerts.swift; sourceTree = "<group>"; };
+		ECB0281722478248000F5F85 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +75,71 @@
 			isa = PBXGroup;
 			children = (
 				EC1137D722440A2800B09D50 /* AppDelegate.swift */,
-				EC1137D922440A2800B09D50 /* ViewController.swift */,
+				EC1138022246B28E00B09D50 /* Controller */,
+				EC1137F5224518BF00B09D50 /* Managers */,
+				EC1138002246886800B09D50 /* Extension */,
+				EC1137F02244DBD100B09D50 /* TableViewCells */,
+				EC1137F32245189F00B09D50 /* Models */,
+				EC1138012246B26300B09D50 /* Resource */,
+				EC1137E622440A2B00B09D50 /* Info.plist */,
+			);
+			path = AccessibilityURLs;
+			sourceTree = "<group>";
+		};
+		EC1137F02244DBD100B09D50 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				EC1137EC22442A1C00B09D50 /* URLTableViewCell.swift */,
+				EC1137F12244DC1100B09D50 /* AddURLTableViewCell.swift */,
+				EC1137FC224655B900B09D50 /* LoadingCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		EC1137F32245189F00B09D50 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC1137EE22442FB500B09D50 /* URLModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EC1137F5224518BF00B09D50 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EC1137FA22463C6A00B09D50 /* URLChecker.swift */,
+				EC1137F62245196A00B09D50 /* CoreDataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		EC1138002246886800B09D50 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EC1137FE2246886100B09D50 /* UIALerts.swift */,
+				ECB0281722478248000F5F85 /* UIDevice.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EC1138012246B26300B09D50 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
 				EC1137DB22440A2800B09D50 /* Main.storyboard */,
 				EC1137E122440A2B00B09D50 /* Assets.xcassets */,
 				EC1137E322440A2B00B09D50 /* LaunchScreen.storyboard */,
-				EC1137E622440A2B00B09D50 /* Info.plist */,
 				EC1137DE22440A2800B09D50 /* AccessibilityURLs.xcdatamodeld */,
+				EC1137F82246217F00B09D50 /* Constants.swift */,
 			);
-			path = AccessibilityURLs;
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		EC1138022246B28E00B09D50 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC1137D922440A2800B09D50 /* RootViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +214,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC1137E022440A2800B09D50 /* AccessibilityURLs.xcdatamodeld in Sources */,
-				EC1137DA22440A2800B09D50 /* ViewController.swift in Sources */,
+				EC1137FB22463C6A00B09D50 /* URLChecker.swift in Sources */,
+				EC1137DA22440A2800B09D50 /* RootViewController.swift in Sources */,
 				EC1137D822440A2800B09D50 /* AppDelegate.swift in Sources */,
+				EC1137FD224655B900B09D50 /* LoadingCell.swift in Sources */,
+				EC1137FF2246886100B09D50 /* UIALerts.swift in Sources */,
+				EC1137F22244DC1100B09D50 /* AddURLTableViewCell.swift in Sources */,
+				ECB0281822478248000F5F85 /* UIDevice.swift in Sources */,
+				EC1137EF22442FB500B09D50 /* URLModel.swift in Sources */,
+				EC1137F72245196A00B09D50 /* CoreDataManager.swift in Sources */,
+				EC1137ED22442A1C00B09D50 /* URLTableViewCell.swift in Sources */,
+				EC1137F92246217F00B09D50 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,12 +371,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AccessibilityURLs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ArmenAlikhanyan.AccessibilityURLs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armen.alikhanyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,12 +389,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AccessibilityURLs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ArmenAlikhanyan.AccessibilityURLs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armen.alikhanyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

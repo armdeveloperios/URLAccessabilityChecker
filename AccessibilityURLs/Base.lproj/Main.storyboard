@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-G0-Tbe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-G0-Tbe">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="URLTableViewCellIdentifier" rowHeight="75" id="TKV-mT-cST" customClass="URLTableViewCell" customModule="AccessibilityURLs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="URLTableViewCellIdentifier" rowHeight="75" id="TKV-mT-cST" customClass="URLTableViewCell" customModule="AccessibilityURLs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TKV-mT-cST" id="fFZ-05-9vQ">
@@ -57,7 +57,7 @@
                                             <outlet property="urlLabel" destination="ecB-4r-KsA" id="rTT-eb-M5e"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadingCellIdentifier" rowHeight="75" id="smH-vR-gxl" customClass="LoadingCell" customModule="AccessibilityURLs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCellIdentifier" rowHeight="75" id="smH-vR-gxl" customClass="LoadingCell" customModule="AccessibilityURLs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="103" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="smH-vR-gxl" id="LK5-gf-YN7">
@@ -92,14 +92,14 @@
                                             <outlet property="urlLabel" destination="Bcg-zT-Xin" id="52F-8w-atL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddURLIdentifier" rowHeight="85" id="6FH-ul-mnI" customClass="AddURLTableViewCell" customModule="AccessibilityURLs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddURLIdentifier" rowHeight="85" id="6FH-ul-mnI" customClass="AddURLTableViewCell" customModule="AccessibilityURLs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="178" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6FH-ul-mnI" id="frK-0X-4Yz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="https://www.xyz.xy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SsE-jE-LhS">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SsE-jE-LhS">
                                                     <rect key="frame" x="16" y="8" width="343" height="68.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -169,9 +169,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="leftButtonItem" destination="9kF-v5-8yb" id="5do-gI-y13"/>
-                        <outlet property="refreshButtonItem" destination="CjZ-ou-vvj" id="jyk-R0-NRw"/>
                         <outlet property="rightButtonItem" destination="Pyw-IV-Bod" id="7h1-yY-MbG"/>
-                        <outlet property="sortButtonItem" destination="3uN-gt-KAL" id="HFZ-v8-eGs"/>
                         <outlet property="tableView" destination="0Gy-G0-Tbe" id="qyc-3F-gPf"/>
                     </connections>
                 </viewController>

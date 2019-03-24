@@ -6,4 +6,17 @@
 //  Copyright © 2019 Armen Alikhanyan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIDevice {
+    class func isIphone() -> Bool {
+        let deviceIdom = UIScreen.main.traitCollection.userInterfaceIdiom
+        
+        switch deviceIdom {
+        case .phone:
+            return true
+        default:
+            return false
+        }
+    }
+}
